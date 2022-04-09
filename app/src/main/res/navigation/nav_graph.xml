@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/countdownFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tsci.electioncountdown.presentation.settings.SettingsFragment"
+        android:label="settings_fragment"
+        tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/countdownFragment"
+        android:name="com.tsci.electioncountdown.presentation.countdown.CountdownFragment"
+        android:label="countdown_fragment"
+        tools:layout="@layout/countdown_fragment" >
+        <action
+            android:id="@+id/action_countdownFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+</navigation>
