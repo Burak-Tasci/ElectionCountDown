@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ElectionCountDown</string>
+    <string name="app_name">Election Countdown</string>
+    <string name="settings">Settings</string>
 </resources>

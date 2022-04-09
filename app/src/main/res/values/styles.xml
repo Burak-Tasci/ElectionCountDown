@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Appcompat.TimerStyle" parent="Theme.AppCompat">
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">#007DD6</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:gradientRadius">4dp</item>
+    </style>
+</resources>
