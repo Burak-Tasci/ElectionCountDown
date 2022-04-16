@@ -1,0 +1,30 @@
+[
+  {
+    "ID": "1",
+    "Country": "Turkey",
+    "Country Code": "tr",
+    "Last Election": "24-07-2018 00:00:00",
+    "Next Election": "25-07-2023 00:00:00"
+  },
+  {
+    "ID": "2",
+    "Country": "U.S.A.",
+    "Country Code": "usa",
+    "Last Election": "03-11-2020 00:00:00",
+    "Next Election": "05-11-2024 00:00:00"
+  },
+  {
+    "ID": "3",
+    "Country": "Russia",
+    "Country Code": "ru",
+    "Last Election": "18-03-2018 00:00:00",
+    "Next Election": "17-03-2024 00:00:00"
+  },
+  {
+    "ID": "4",
+    "Country": "Ukraine",
+    "Country Code": "uk",
+    "Last Election": "31-03-2019 00:00:00",
+    "Next Election": "31-03-2024 00:00:00"
+  }
+]
