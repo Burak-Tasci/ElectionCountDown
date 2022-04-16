@@ -12,4 +12,5 @@
     <!-- Theme Colors !-->
 
     <color name="blue">#007DD6</color>
+    <color name="lightBlue">#38a2f0</color>
 </resources>
