@@ -1,4 +1,4 @@
-package com.tsci.electioncountdown.presentation.settings
+package com.tsci.electioncountdown.presentation.ui.settings
 
 import androidx.lifecycle.ViewModel
 

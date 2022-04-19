@@ -1,13 +1,11 @@
-package com.tsci.electioncountdown.presentation.settings
+package com.tsci.electioncountdown.presentation.ui.settings
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tsci.electioncountdown.R
-import dagger.hilt.android.AndroidEntryPoint
 
 class SettingsFragment : Fragment() {
 

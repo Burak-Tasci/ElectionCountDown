@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.tsci.electioncountdown.presentation.settings.SettingsFragment"
+        android:name="com.tsci.electioncountdown.presentation.ui.settings.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/countdownFragment"
-        android:name="com.tsci.electioncountdown.presentation.countdown.CountdownFragment"
+        android:name="com.tsci.electioncountdown.presentation.ui.countdown.CountdownFragment"
         android:label="countdown_fragment"
         tools:layout="@layout/countdown_fragment" >
         <action
