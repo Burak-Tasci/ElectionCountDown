@@ -9,7 +9,7 @@ interface FlagsRepository {
 
     suspend fun getCountryById(id: String): CountryItem
 
-    suspend fun getCountryByName(name: String): CountryItem
+    suspend fun getCountryByName(name: String): CountryItem?
 
     suspend fun getFlagUrlByCountryName(name: String): String
 

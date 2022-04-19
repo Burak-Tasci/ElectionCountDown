@@ -1,8 +1,10 @@
 package com.tsci.electioncountdown.data.repository
 
 import android.content.res.Resources
+import com.google.gson.JsonObject
 import com.tsci.electioncountdown.common.Constants.BASE_URL
 import com.tsci.electioncountdown.data.model.CountryItem
+import java.net.URL
 import javax.inject.Inject
 
 class FlagsRepositoryImpl @Inject constructor(
@@ -16,11 +18,11 @@ class FlagsRepositoryImpl @Inject constructor(
         throw Resources.NotFoundException("Country Not Found!")
     }
 
-    override suspend fun getCountryByName(name: String): CountryItem {
+    override suspend fun getCountryByName(name: String): CountryItem? {
         database.forEach {
             if(it.country.equals(name)) return it
         }
-        throw Resources.NotFoundException("Country Not Found!")
+        return null
     }
 
     override suspend fun getFlagUrlByCountryName(name: String): String {
