@@ -2,6 +2,8 @@ package com.tsci.electioncountdown.presentation.ui.countdown
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -9,13 +11,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tsci.electioncountdown.R
 import com.tsci.electioncountdown.databinding.CountdownFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 private const val TAG = "CountdownFragment.kt"
 @AndroidEntryPoint
@@ -28,7 +35,6 @@ class CountdownFragment : Fragment() {
     private val viewModel: CountdownViewModel by viewModels()
 
     private var _binding: CountdownFragmentBinding? = null
-
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -43,15 +49,13 @@ class CountdownFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        requestPermissions()
 
         viewModel.getProgress().observe(this.viewLifecycleOwner){
             binding.progressbar.progress = it
             binding.progressbarText.text = it.toString()
         }
         binding.countdown.start(viewModel.countDownTime())
-
-        Log.d(TAG, "onViewCreated: ${viewModel.getCountry()}")
 
         Glide
             .with(this)
@@ -60,9 +64,10 @@ class CountdownFragment : Fragment() {
             .placeholder(R.drawable.ic_launcher_background)
             .into(binding.flagItem.flagImageView)
 
-        requestPermissions()
-
-
+        binding.changeCountryButton.setOnClickListener {
+            val action = CountdownFragmentDirections.actionCountdownFragmentToSettingsFragment()
+            findNavController().navigate(action)
+        }
     }
 
 
