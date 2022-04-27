@@ -1,6 +1,7 @@
 package com.tsci.electioncountdown.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.tsci.electioncountdown.common.Constants
 
 data class CountryItem(
     @SerializedName("Country")
@@ -14,3 +15,6 @@ data class CountryItem(
     @SerializedName("Next Election")
     val nextElection: String
 )
+internal fun CountryItem.getFlagImageUrl(): String {
+    return Constants.BASE_URL + "/" + this.countryCode
+}
