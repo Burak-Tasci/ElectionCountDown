@@ -2,8 +2,6 @@ package com.tsci.electioncountdown.presentation.ui.countdown
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -11,30 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tsci.electioncountdown.R
 import com.tsci.electioncountdown.databinding.CountdownFragmentBinding
+import com.tsci.electioncountdown.presentation.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val TAG = "CountdownFragment.kt"
+
 @AndroidEntryPoint
 class CountdownFragment : Fragment() {
 
-    companion object {
-        const val COUNTRY_NAME: String = "country_name"
-    }
-
-    private val viewModel: CountdownViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
     private var _binding: CountdownFragmentBinding? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
@@ -51,25 +47,35 @@ class CountdownFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
 
-        viewModel.getProgress().observe(this.viewLifecycleOwner){
-            binding.progressbar.progress = it
-            binding.progressbarText.text = it.toString()
+        viewModel.countryItem.observe(this.viewLifecycleOwner) {
+            viewModel.getProgress().observe(this.viewLifecycleOwner) {
+                binding.progressbar.progress = it
+                binding.progressbarText.text = it.toString()
+            }
+            binding.countdown.start(viewModel.countDownTime())
+            Glide
+                .with(this)
+                .load(viewModel.getFlagImageUrl())
+                .apply(RequestOptions().override(800, 600))
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.flagItem.flagImageView)
+            binding.flagItem.countryName.text = viewModel.countryItem.value!!.country
         }
-        binding.countdown.start(viewModel.countDownTime())
 
-        Glide
-            .with(this)
-            .load(viewModel.getFlagImageUrl())
-            .apply(RequestOptions().override(800, 400))
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(binding.flagItem.flagImageView)
+
+
+        GlobalScope.launch {
+            while (true) {
+                Log.d(TAG, "onViewCreated: ${viewModel.countryItem.value}")
+                delay(5000)
+            }
+        }
 
         binding.changeCountryButton.setOnClickListener {
             val action = CountdownFragmentDirections.actionCountdownFragmentToSettingsFragment()
             findNavController().navigate(action)
         }
     }
-
 
     private fun hasAccessFineLocation() = ActivityCompat.checkSelfPermission(
         requireContext(),
@@ -81,18 +87,19 @@ class CountdownFragment : Fragment() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
-    private fun requestPermissions(){
+    private fun requestPermissions() {
 
         val permissionsToRequest = mutableListOf<String>()
-        if (!hasAccessCoarseLocation()){
+        if (!hasAccessCoarseLocation()) {
             permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
-        if (!hasAccessFineLocation()){
+        if (!hasAccessFineLocation()) {
             permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
-        if (permissionsToRequest.isNotEmpty()){
-            ActivityCompat.requestPermissions(requireActivity(),
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
                 permissionsToRequest.toTypedArray(),
                 0
             )
@@ -106,10 +113,13 @@ class CountdownFragment : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0 && grantResults.isNotEmpty()){
-            for(i in grantResults.indices){
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    Log.d(com.tsci.electioncountdown.presentation.TAG, "onRequestPermissionsResult: ${permissions[i]} granted.")
+        if (requestCode == 0 && grantResults.isNotEmpty()) {
+            for (i in grantResults.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(
+                        com.tsci.electioncountdown.presentation.TAG,
+                        "onRequestPermissionsResult: ${permissions[i]} granted."
+                    )
                 }
             }
         }
