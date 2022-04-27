@@ -1,6 +1,7 @@
 package com.tsci.electioncountdown.data.repository
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.google.gson.JsonObject
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.flowOf
 import java.net.URL
 import javax.inject.Inject
 
+private const val TAG = "FlagsRepositoryImpl.kt"
 class FlagsRepositoryImpl @Inject constructor(
     private val database: List<CountryItem>
 )  : FlagsRepository {
@@ -31,7 +33,8 @@ class FlagsRepositoryImpl @Inject constructor(
 
     override fun getCountryByCode(code: String): Flow<CountryItem?> {
         database.forEach {
-            if (it.countryCode.uppercase().equals(code)) return flowOf(it)
+            if (it.countryCode.uppercase().equals(code))
+                return flowOf(it)
         }
         return flowOf(null)
     }
