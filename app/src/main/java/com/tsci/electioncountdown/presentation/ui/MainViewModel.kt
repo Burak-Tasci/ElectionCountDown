@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences,
 ) : ViewModel() {
 
-    internal val countryItem by lazy { MutableLiveData<CountryItem>() }
+    val countryItem by lazy { MutableLiveData<CountryItem>() }
 
     @Inject
     internal lateinit var database: List<CountryItem>
@@ -76,7 +76,7 @@ class MainViewModel @Inject constructor(
         return -1L
     }
 
-    internal fun getProgress(): LiveData<Int> {
+    fun getProgress(): LiveData<Int> {
 
         val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
         return if (countryItem.value != null) {
