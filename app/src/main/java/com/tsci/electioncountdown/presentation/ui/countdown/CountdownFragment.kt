@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -38,7 +40,18 @@ class CountdownFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CountdownFragmentBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.countdown_fragment,
+            container,
+            false
+        )
+        binding.run {
+            mainViewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+            flagItem.mainViewModel = viewModel
+            flagItem.lifecycleOwner = viewLifecycleOwner
+        }
         return binding.root
     }
 
@@ -47,11 +60,8 @@ class CountdownFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
 
+
         viewModel.countryItem.observe(this.viewLifecycleOwner) {
-            viewModel.getProgress().observe(this.viewLifecycleOwner) {
-                binding.progressbar.progress = it
-                binding.progressbarText.text = it.toString()
-            }
             binding.countdown.start(viewModel.countDownTime())
             Glide
                 .with(this)
@@ -59,7 +69,6 @@ class CountdownFragment : Fragment() {
                 .apply(RequestOptions().override(800, 600))
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(binding.flagItem.flagImageView)
-            binding.flagItem.countryName.text = viewModel.countryItem.value!!.country
         }
 
 

@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ui.countdown.CountdownFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="com.tsci.electioncountdown.presentation.ui.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.countdown.CountdownFragment">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -15,72 +23,75 @@
 
             <include
                 android:id="@+id/flag_item"
-                layout="@layout/flag_item"/>
+                layout="@layout/flag_item" />
         </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/circle_shape"
-        android:indeterminate="false"
-        android:max="100"
-        android:progressDrawable="@drawable/circular_progress_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:progress="65" />
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:progress="@{mainViewModel.getProgress()}"
+            android:background="@drawable/circle_shape"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@drawable/circular_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="65" />
 
-    <TextView
-        android:id="@+id/progressbar_text"
-        style="@style/Theme.Appcompat.TimerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/progressbar"
-        app:layout_constraintEnd_toEndOf="@id/progressbar"
-        app:layout_constraintStart_toStartOf="@id/progressbar"
-        app:layout_constraintTop_toTopOf="@id/progressbar"
-        tools:text="23" />
+        <TextView
+            android:id="@+id/progressbar_text"
+            style="@style/Theme.Appcompat.TimerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{mainViewModel.getProgress().toString()}"
+            app:layout_constraintBottom_toBottomOf="@id/progressbar"
+            app:layout_constraintEnd_toEndOf="@id/progressbar"
+            app:layout_constraintStart_toStartOf="@id/progressbar"
+            app:layout_constraintTop_toTopOf="@id/progressbar"
+            tools:text="23" />
 
-    <cn.iwgang.countdownview.CountdownView
-        android:id="@+id/countdown"
-        style="@style/Theme.Appcompat.TimerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        app:isHideTimeBackground="false"
-        app:isShowDay="true"
-        app:isShowHour="true"
-        app:isShowMillisecond="true"
-        app:isShowMinute="true"
-        app:isShowSecond="true"
-        app:isTimeTextBold="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressbar"
-        app:suffixDay="d"
-        app:suffixGravity="bottom"
-        app:suffixHour="h"
-        app:suffixMillisecond="ms"
-        app:suffixMinute="m"
-        app:suffixSecond="s"
-        app:suffixTextColor="#000000"
-        app:suffixTextSize="12sp"
-        app:timeBgColor="#007DD6"
-        app:timeTextColor="#FFFFFF"
-        app:timeTextSize="32sp" />
+        <cn.iwgang.countdownview.CountdownView
+            android:id="@+id/countdown"
+            style="@style/Theme.Appcompat.TimerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            app:isHideTimeBackground="false"
+            app:isShowDay="true"
+            app:isShowHour="true"
+            app:isShowMillisecond="true"
+            app:isShowMinute="true"
+            app:isShowSecond="true"
+            app:isTimeTextBold="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressbar"
+            app:suffixDay="d"
+            app:suffixGravity="bottom"
+            app:suffixHour="h"
+            app:suffixMillisecond="ms"
+            app:suffixMinute="m"
+            app:suffixSecond="s"
+            app:suffixTextColor="#000000"
+            app:suffixTextSize="12sp"
+            app:timeBgColor="#007DD6"
+            app:timeTextColor="#FFFFFF"
+            app:timeTextSize="32sp" />
 
-    <Button
-        android:id="@+id/change_country_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/change_country_buttontext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/change_country_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/change_country_buttontext"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
