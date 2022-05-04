@@ -23,10 +23,10 @@ private const val TAG = "CountryArrayAdapter.kt"
 
 class CountryArrayAdapter(
     context: Context,
-    private val viewModel: MainViewModel
+    database: List<CountryItem>
 ) : ArrayAdapter<CountryItem>(
     context, 0,
-    viewModel.database
+    database
 ) {
 
 

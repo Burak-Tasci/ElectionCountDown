@@ -29,18 +29,17 @@ class MainViewModel @Inject constructor(
     private val context: Context,
     private val repository: FlagsRepository,
     private val sharedPreferences: SharedPreferences,
+    database: List<CountryItem>
 ) : ViewModel() {
 
     val countryItem by lazy { MutableLiveData<CountryItem>() }
-
-    @Inject
-    internal lateinit var database: List<CountryItem>
 
     companion object {
         const val COUNTRY_NAME: String = "country_name"
     }
 
     init {
+        Log.d(TAG, "$database: ")
         setCountry()
     }
 

@@ -47,10 +47,10 @@ class CountdownFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestPermissions()
 
-        viewModel.countryItem.observe(this.viewLifecycleOwner) {
-            viewModel.getProgress().observe(this.viewLifecycleOwner) {
-                binding.progressbar.progress = it
-                binding.progressbarText.text = it.toString()
+        viewModel.countryItem.observe(this.viewLifecycleOwner) { countryItem ->
+            viewModel.getProgress().observe(this.viewLifecycleOwner) { progress ->
+                binding.progressbar.progress = progress
+                binding.progressbarText.text = progress.toString()
             }
             binding.countdown.start(viewModel.countDownTime())
             Glide
