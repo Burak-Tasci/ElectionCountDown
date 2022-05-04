@@ -1,50 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:gravity="center_horizontal"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+            <variable
+                name="mainViewModel"
+                type="com.tsci.electioncountdown.presentation.ui.MainViewModel" />
+    </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="256dp"
-        android:layout_height="192dp"
-        app:strokeColor="@color/blue"
-        app:strokeWidth="3dp"
-        app:cardCornerRadius="25dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/country_name"
-                android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="256dp"
+            android:layout_height="192dp"
+            app:strokeColor="@color/blue"
+            app:strokeWidth="3dp"
+            app:cardCornerRadius="25dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Turkey"
-                android:textAlignment="center"
-                android:textColor="@color/blue"
-                android:textStyle="bold"
-                android:textAppearance="?attr/textAppearanceHeadline6"/>
+                android:orientation="vertical">
 
-            <com.google.android.material.divider.MaterialDivider
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:dividerColor="@color/blue"
-                android:minWidth="3dp"/>
+                <TextView
+                    android:id="@+id/country_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{mainViewModel.countryItem.country}"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"
+                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceHeadline6" />
 
-            <ImageView
-                android:id="@+id/flag_image_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                tools:src="@drawable/splash_background" />
-        </LinearLayout>
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerColor="@color/blue"
+                    android:minWidth="3dp" />
+
+                <ImageView
+                    android:id="@+id/flag_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/splash_background" />
+            </LinearLayout>
 
 
-    </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
