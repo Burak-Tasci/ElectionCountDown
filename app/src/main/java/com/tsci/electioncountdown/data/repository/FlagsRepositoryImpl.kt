@@ -24,19 +24,20 @@ class FlagsRepositoryImpl @Inject constructor(
         throw Resources.NotFoundException("Country Not Found!")
     }
 
-    override fun getCountryByName(name: String): Flow<CountryItem?> {
+    override suspend fun getCountryByName(name: String): Flow<CountryItem?> {
         database.forEach {
             if(it.country.equals(name)) return flowOf(it)
         }
         return flowOf(null)
     }
 
-    override fun getCountryByCode(code: String): Flow<CountryItem?> {
+    override fun getCountryByCode(code: String): CountryItem? {
+        var item: CountryItem? = null
         database.forEach {
             if (it.countryCode.uppercase().equals(code))
-                return flowOf(it)
+                item = it
         }
-        return flowOf(null)
+        return item
     }
 
     override suspend fun getFlagUrlByCountryName(name: String): String {

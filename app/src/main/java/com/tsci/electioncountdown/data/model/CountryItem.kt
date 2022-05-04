@@ -16,5 +16,5 @@ data class CountryItem(
     val nextElection: String
 )
 internal fun CountryItem.getFlagImageUrl(): String {
-    return Constants.BASE_URL + "/" + this.countryCode
+    return Constants.BASE_URL + this.countryCode
 }

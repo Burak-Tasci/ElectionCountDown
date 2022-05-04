@@ -95,13 +95,7 @@ class MainViewModel @Inject constructor(
 
     private fun getCountryItemByCode(code: String): CountryItem? {
 
-        var countryItem: CountryItem? = null
-        runBlocking {
-            repository.getCountryByCode(code).collect {
-                countryItem = it
-            }
-        }
-        return countryItem
+        return repository.getCountryByCode(code)
     }
 
     internal fun getFlagImageUrl(): String {

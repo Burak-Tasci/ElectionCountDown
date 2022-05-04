@@ -11,9 +11,9 @@ interface FlagsRepository {
 
     suspend fun getCountryById(id: String): CountryItem
 
-    fun getCountryByName(name: String): Flow<CountryItem?>
+    suspend fun getCountryByName(name: String): Flow<CountryItem?>
 
-    fun getCountryByCode(code: String): Flow<CountryItem?>
+    fun getCountryByCode(code: String): CountryItem?
 
     suspend fun getFlagUrlByCountryName(name: String): String
 
