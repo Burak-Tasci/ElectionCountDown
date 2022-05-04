@@ -39,6 +39,10 @@ class CountdownFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = CountdownFragmentBinding.inflate(inflater, container, false)
+        binding.mainViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.flagItem.mainViewModel = viewModel
+        binding.flagItem.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -48,10 +52,6 @@ class CountdownFragment : Fragment() {
         requestPermissions()
 
         viewModel.countryItem.observe(this.viewLifecycleOwner) { countryItem ->
-            viewModel.getProgress().observe(this.viewLifecycleOwner) { progress ->
-                binding.progressbar.progress = progress
-                binding.progressbarText.text = progress.toString()
-            }
             binding.countdown.start(viewModel.countDownTime())
             Glide
                 .with(this)
@@ -59,7 +59,6 @@ class CountdownFragment : Fragment() {
                 .apply(RequestOptions().override(800, 600))
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(binding.flagItem.flagImageView)
-            binding.flagItem.countryName.text = viewModel.countryItem.value!!.country
         }
 
 

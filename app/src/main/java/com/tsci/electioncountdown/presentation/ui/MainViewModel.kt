@@ -39,7 +39,6 @@ class MainViewModel @Inject constructor(
     }
 
     init {
-        Log.d(TAG, "$database: ")
         setCountry()
     }
 
