@@ -9,13 +9,8 @@ import retrofit2.http.Path
 
 interface FlagsRepository {
 
-    suspend fun getCountryById(id: String): CountryItem
-
     suspend fun getCountryByName(name: String): Flow<CountryItem?>
 
     fun getCountryByCode(code: String): CountryItem?
 
-    suspend fun getFlagUrlByCountryName(name: String): String
-
-    suspend fun getFlagUrlByCountryId(id: String): String
 }

@@ -28,9 +28,7 @@ private const val TAG = "MainViewModel.kt"
 class MainViewModel @Inject constructor(
     private val context: Context,
     private val repository: FlagsRepository,
-    private val sharedPreferences: SharedPreferences,
-    database: List<CountryItem>
-) : ViewModel() {
+    private val sharedPreferences: SharedPreferences) : ViewModel() {
 
     val countryItem by lazy { MutableLiveData<CountryItem>() }
 
@@ -98,9 +96,6 @@ class MainViewModel @Inject constructor(
         return repository.getCountryByCode(code)
     }
 
-    internal fun getFlagImageUrl(): String {
-        return countryItem.value?.getFlagImageUrl().toString()
-    }
 
     internal fun getCountryItemByName(countryName: String): CountryItem? {
 

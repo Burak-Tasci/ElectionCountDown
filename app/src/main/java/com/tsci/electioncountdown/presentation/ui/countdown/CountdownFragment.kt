@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tsci.electioncountdown.R
+import com.tsci.electioncountdown.data.model.getFlagImageUrl
 import com.tsci.electioncountdown.databinding.CountdownFragmentBinding
 import com.tsci.electioncountdown.presentation.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +56,7 @@ class CountdownFragment : Fragment() {
             binding.countdown.start(viewModel.countDownTime())
             Glide
                 .with(this)
-                .load(viewModel.getFlagImageUrl())
+                .load(countryItem.getFlagImageUrl())
                 .apply(RequestOptions().override(800, 600))
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(binding.flagItem.flagImageView)

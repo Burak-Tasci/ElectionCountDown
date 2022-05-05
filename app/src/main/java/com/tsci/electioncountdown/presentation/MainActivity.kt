@@ -1,16 +1,12 @@
 package com.tsci.electioncountdown.presentation
 
-import android.Manifest
-import android.app.Activity
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.tsci.electioncountdown.R
+import com.tsci.electioncountdown.presentation.ui.countdown.CountdownFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -29,7 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
-            R.id.settings -> Toast.makeText(this,"Settings Selected",Toast.LENGTH_SHORT).show()
+            R.id.settings -> {
+                val action = CountdownFragmentDirections.actionCountdownFragmentToSettingsFragment()
+                supportFragmentManager.primaryNavigationFragment!!
+                .findNavController().navigate(action)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
