@@ -18,21 +18,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.options_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.settings -> {
-                val action = CountdownFragmentDirections.actionCountdownFragmentToSettingsFragment()
-                supportFragmentManager.primaryNavigationFragment!!
-                .findNavController().navigate(action)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
 }

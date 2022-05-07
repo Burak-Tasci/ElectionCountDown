@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.tsci.electioncountdown.R
 import com.tsci.electioncountdown.data.model.CountryItem
 import com.tsci.electioncountdown.databinding.SettingsFragmentBinding
 import com.tsci.electioncountdown.presentation.ui.MainViewModel
@@ -45,7 +48,10 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpSpinner()
+    }
 
+    private fun setUpSpinner() {
         binding.countrySpinner.adapter = CountryArrayAdapter(
             requireContext(),
             database
@@ -81,5 +87,4 @@ class SettingsFragment : Fragment() {
             }
         }
     }
-
 }

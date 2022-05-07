@@ -18,9 +18,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="256dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="?attr/colorOnSurface"
             android:layout_height="192dp"
-            app:strokeColor="@color/blue"
-            app:strokeWidth="3dp"
             app:cardCornerRadius="25dp">
 
             <LinearLayout
@@ -34,14 +34,13 @@
                     android:layout_height="wrap_content"
                     android:text="@{mainViewModel.countryItem.country}"
                     android:textAlignment="center"
-                    android:textColor="@color/blue"
                     android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <com.google.android.material.divider.MaterialDivider
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dividerColor="@color/blue"
+                    app:dividerColor="?attr/colorSurface"
                     android:minWidth="3dp" />
 
                 <ImageView

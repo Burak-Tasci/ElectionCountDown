@@ -17,9 +17,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/progressbar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/progressbar">
+            app:layout_constraintStart_toStartOf="parent">
 
             <include
                 android:id="@+id/flag_item"
@@ -31,10 +31,10 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:progress="@{mainViewModel.getProgress()}"
             android:background="@drawable/circle_shape"
             android:indeterminate="false"
             android:max="100"
+            android:progress="@{mainViewModel.getProgress()}"
             android:progressDrawable="@drawable/circular_progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="@id/progressbar"
             app:layout_constraintStart_toStartOf="@id/progressbar"
             app:layout_constraintTop_toTopOf="@id/progressbar"
-            tools:text="23" />
+            tools:text="65" />
 
         <cn.iwgang.countdownview.CountdownView
             android:id="@+id/countdown"
@@ -76,16 +76,17 @@
             app:suffixMillisecond="ms"
             app:suffixMinute="m"
             app:suffixSecond="s"
-            app:suffixTextColor="#000000"
+            app:suffixTextColor="?attr/colorOnBackground"
             app:suffixTextSize="12sp"
-            app:timeBgColor="#007DD6"
-            app:timeTextColor="#FFFFFF"
+            app:timeBgColor="?attr/colorSurface"
+            app:timeTextColor="?attr/colorOnBackground"
             app:timeTextSize="32sp" />
 
         <Button
             android:id="@+id/change_country_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_margin="16dp"
             android:text="@string/change_country_buttontext"
             app:layout_constraintBottom_toBottomOf="parent"
