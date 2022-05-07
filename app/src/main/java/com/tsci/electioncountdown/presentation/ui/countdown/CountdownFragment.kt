@@ -50,7 +50,6 @@ class CountdownFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requestPermissions()
 
         viewModel.countryItem.observe(this.viewLifecycleOwner) { countryItem ->
             binding.countdown.start(viewModel.countDownTime())
@@ -62,66 +61,10 @@ class CountdownFragment : Fragment() {
                 .into(binding.flagItem.flagImageView)
         }
 
-
-
-        GlobalScope.launch {
-            while (true) {
-                Log.d(TAG, "onViewCreated: ${viewModel.countryItem.value}")
-                delay(5000)
-            }
-        }
-
         binding.changeCountryButton.setOnClickListener {
             val action = CountdownFragmentDirections.actionCountdownFragmentToSettingsFragment()
             findNavController().navigate(action)
         }
     }
 
-    private fun hasAccessFineLocation() = ActivityCompat.checkSelfPermission(
-        requireContext(),
-        Manifest.permission.ACCESS_FINE_LOCATION
-    ) == PackageManager.PERMISSION_GRANTED
-
-    private fun hasAccessCoarseLocation() = ActivityCompat.checkSelfPermission(
-        requireContext(),
-        Manifest.permission.ACCESS_COARSE_LOCATION
-    ) == PackageManager.PERMISSION_GRANTED
-
-    private fun requestPermissions() {
-
-        val permissionsToRequest = mutableListOf<String>()
-        if (!hasAccessCoarseLocation()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (!hasAccessFineLocation()) {
-            permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-
-        if (permissionsToRequest.isNotEmpty()) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                permissionsToRequest.toTypedArray(),
-                0
-            )
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0 && grantResults.isNotEmpty()) {
-            for (i in grantResults.indices) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d(
-                        com.tsci.electioncountdown.presentation.TAG,
-                        "onRequestPermissionsResult: ${permissions[i]} granted."
-                    )
-                }
-            }
-        }
-    }
 }
