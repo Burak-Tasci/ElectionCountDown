@@ -3,4 +3,9 @@
     <string name="settings">Settings</string>
     <string name="change_country_buttontext">Change Country</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="three_month">3 MONTH</string>
+    <string name="one_month">1 MONTH</string>
+    <string name="one_week">1 WEEK</string>
+    <string name="one_day">1 DAY</string>
+    <string name="alarm_interval">Alarm Interval: </string>
 </resources>
