@@ -36,6 +36,7 @@ android {
         viewBinding true
         dataBinding true
     }
+    namespace 'com.tsci.electioncountdown'
 }
 
 dependencies {

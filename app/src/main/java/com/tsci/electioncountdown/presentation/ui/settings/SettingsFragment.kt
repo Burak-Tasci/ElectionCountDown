@@ -1,24 +1,17 @@
 package com.tsci.electioncountdown.presentation.ui.settings
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.RadioButton
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import com.tsci.electioncountdown.R
 import com.tsci.electioncountdown.data.model.CountryItem
 import com.tsci.electioncountdown.databinding.SettingsFragmentBinding
 import com.tsci.electioncountdown.presentation.ui.MainViewModel
 import com.tsci.electioncountdown.presentation.ui.MainViewModel.Companion.COUNTRY_NAME
-import com.tsci.electioncountdown.presentation.ui.countdown.CountdownFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

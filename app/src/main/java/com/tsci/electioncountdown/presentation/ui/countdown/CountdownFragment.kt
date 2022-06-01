@@ -1,14 +1,10 @@
 package com.tsci.electioncountdown.presentation.ui.countdown
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,9 +15,6 @@ import com.tsci.electioncountdown.data.model.getFlagImageUrl
 import com.tsci.electioncountdown.databinding.CountdownFragmentBinding
 import com.tsci.electioncountdown.presentation.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 private const val TAG = "CountdownFragment.kt"
 
@@ -57,7 +50,7 @@ class CountdownFragment : Fragment() {
                 .with(this)
                 .load(countryItem.getFlagImageUrl())
                 .apply(RequestOptions().override(800, 600))
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.loading_animation)
                 .into(binding.flagItem.flagImageView)
         }
 
